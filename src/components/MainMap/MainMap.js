@@ -1,10 +1,6 @@
 import React from 'react';
 import { Map, MouseTool } from 'react-amap';
 
-const randomPosition = () => ({
-  longitude: 120 + Math.random() * 20,
-  latitude: 30 + Math.random() * 10,
-});
 const loadingStyle = {
   position: 'relative',
   height: '100%',
@@ -13,21 +9,30 @@ const loadingStyle = {
   justifyContent: 'center',
   alignItems: 'center'
 }
+
 const Loading = <div style={loadingStyle}>Loading Map...</div>
 
 class MainMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapCenter: randomPosition()
-    }
+      what: '点击下方按钮开始绘制',
+      mapPlugins: ['ToolBar','ControlBar'],
+      mapCenter: {longitude: 120, latitude: 35}
+    };
   }
-
   render() {
     return (
       <div>
         <div style={{width: '100%', height: '100vh'}}>
-          <Map zoom={5} loading={Loading} center={this.state.mapCenter}/>
+          <Map
+            viewMode="3D"
+            zoom={5}
+            plugins={this.state.mapPlugins}
+            center={this.state.mapCenter}
+            loading={Loading}
+          >
+          </Map>
         </div>
       </div>
 
